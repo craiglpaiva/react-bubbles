@@ -27,10 +27,23 @@ In this project you will create a login page and request a token from the server
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain what a token is used for.
-- [ ] What steps can you take in your web apps to keep your data secure?
-- [ ] Describe how web servers work.
-- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+    A Token is used to access protected resources or pages instead of the login credentials for a specific length of time.
 
+- [ ] What steps can you take in your web apps to keep your data secure?
+    1.	Keep your software up to date.
+    2.	Watch out for SQL injections.
+    3.	Protect against XSS attacks.
+    4.	Beware of error messages.
+    5.	Validate on both sides of the application.
+    6.	Check your passwords.
+    7.	Avoid file uploads.
+    8.	Always use HTTPS.
+
+- [ ] Describe how web servers work.
+    A web server translates incoming network requests over HTTP along with other related protocols. The primary function of a web server is to process, store, and deliver web pages to clients. The communication between client and server takes place using the Hypertext Transfer Protocol (HTTP)
+
+- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+    PUT can map to both Create and Update depending on the existence of the URI used with the PUT. POST can also map to Update, although it is typically used for Create. POST can also be a partial update, so we do not need the PATCH method.
 
 ## Project Set Up
 

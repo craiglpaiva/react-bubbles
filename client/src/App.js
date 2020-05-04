@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import BubblesPage from "./components/BubblesPage";
+import PrivateRoute from "./components/PrivateRoute";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Login from "./components/Login";
@@ -13,6 +15,7 @@ function App() {
           Build a PrivateRoute component that will 
           display BubblePage when you're authenticated 
         */}
+        <PrivateRoute path='/bubblespage' component={BubblesPage} />``
       </div>
     </Router>
   );
