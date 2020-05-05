@@ -4,28 +4,27 @@ import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
 
-const BubblePage = (props) => {
+const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
   // fetch your colors data from the server when the component mounts
   // set that data to the colorList state property
-  useEffect(() => {
-    axiosWithAuth().get('http://localhost:5000/api/colors')
+  const getColorList = () => {
+    axiosWithAuth()
+      .get("/api/colors")
       .then(res => {
-        setColorList(res.data)
+        setColorList(res.data);
       })
-      .catch(err => {
-        console.log(err);
-        alert("Error Retrieving Colors", props)
-      })
-  }, [props])
+      .catch(err => console.log(err));
+  }
 
+  useEffect(getColorList, []);
 
   return (
     <>
-      <ColorList colors={colorList} updateColors={setColorList} />
-      <Bubbles colors={colorList} />
+      <ColorList colors={colorList} updateColors={setColorList} getColorList={getColorList} />
+      <Bubbles colorlist={colorList} />
     </>
   );
-};
 
+};
 export default BubblePage;

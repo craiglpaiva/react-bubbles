@@ -2,44 +2,36 @@ import React, { useState } from "react";
 import { axiosWithAuth } from "./axiosWithAuth";
 
 
-export const Login = (props) => {
+const Login = (props) => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
-  const [formState, setFormState] = useState({ username: '', password: '' });
 
-  axiosWithAuth().post('http://localhost:5000/api/login', formState)
-    .then(res => {
-      localStorage.setItem('token', res.data.payload);
-      props.history.push('/bubblepage');
-    })
-    .catch(err => {
-      console.log(err);
-      // alert('Login Incorrect');
-    })
+  const [formState, setFormState] = useState({ username: 'Lambda School', password: 'i<3Lambd4' });
 
-  const handleChange = e => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
+  const handleOnChange = ({ target: { name, value } }) => {
+    setFormState({ ...formState, [name]: value })
     console.log(formState);
   }
 
-  const handleSubmit = e => {
+  const handleOnSubmit = e => {
     e.preventDefault();
+    axiosWithAuth().post('/api/login', formState)
+      .then(res => {
+        localStorage.setItem("token", res.data.payload);
+        props.history.push('/bubblePage');
+      })
+      .catch(err => console.log(err));
   }
 
   return (
     <div>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          value={formState.username}
-          onChange={handleChange}
+      <h1>Welcome to the Bubbles Page!</h1>
+      <form onSubmit={handleOnSubmit}>
+        <label>Username</label>
+        <input type="text" name="username" onChange={handleOnChange} value={formState.username}
         />
-        <input
-          type="password"
-          name="password"
-          value={formState.password}
-          onChange={handleChange}
+        <label>Password</label>
+        <input type="password" name="password" onChange={handleOnChange} value={formState.password}
         />
         <button>Log in</button>
       </form>

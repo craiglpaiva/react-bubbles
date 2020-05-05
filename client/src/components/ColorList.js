@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axiosWithAuth from "./axiosWithAuth";
 
+
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors, update }) => {
+const ColorList = ({ colors, getColorList }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -21,28 +22,25 @@ const ColorList = ({ colors, updateColors, update }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+
+    console.log(colorToEdit);
+    axiosWithAuth()
+      .put('/api/colors/colorToEdit.id')
+      .then(res => {
+        getColorList();
+      })
+      .catch(err => console.log(err));
   }
-  console.log(colorToEdit);
-  axiosWithAuth().put('http://localhost:5000/api/colors/colorToEdit.id')
-    .then(res => {
-      console.log(res.data);
-      updateColors();
-      setEditing(false);
-      PushManager("/bubblepage");
-    })
-    .catch(err => {
-      console.log("ColorList Put Error ".err);
-    });
 
   const deleteColor = color => {
     // make a delete request to delete this color
-    axiosWithAuth().delete('http://localhost:5000/api/colors/color.id')
+    axiosWithAuth()
+      .delete('http://localhost:5000/api/colors/color.id')
       .then(res => {
-        update();
+        getColorList();
       })
-      .catch(err => {
-        console.log(err);
-      })
+      .catch(err => console.log(err));
+
   };
 
   return (
