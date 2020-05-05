@@ -7,9 +7,9 @@ export const Login = (props) => {
   // when you have handled the token, navigate to the BubblePage route
   const [formState, setFormState] = useState({ username: '', password: '' });
 
-  axiosWithAuth().post('http://localhost:3000/api/login', formState)
+  axiosWithAuth().post('http://localhost:5000/api/login', formState)
     .then(res => {
-      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('token', res.data.payload);
       props.history.push('/bubblepage');
     })
     .catch(err => {
